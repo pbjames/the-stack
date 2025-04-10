@@ -19,3 +19,9 @@ cd backend
 uv sync
 uv run fastapi dev main.py
 ```
+
+### Extra
+
+```sh
+uv run main.py
+```
