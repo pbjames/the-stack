@@ -38,13 +38,13 @@ def remake():
     print("Database remade")
 
 
-@app.get("/todos/{item_id}")
+@app.get("/api/todos/{item_id}")
 def read_todo(item_id: int) -> list[Todo]:
     cursor = conn.execute(f"SELECT * FROM todos WHERE id={item_id}")
     return cursor.fetchall()
 
 
-@app.post("/todos/")
+@app.post("/api/todos/")
 def create_todo(todo: Todo):
     values = f"VALUES ({todo.creation_timestamp},\
     {todo.completion_timestamp}, {todo.content}, {todo.user_id})"
@@ -52,20 +52,20 @@ def create_todo(todo: Todo):
     conn.execute(f"INSERT {values} INTO {target}")
 
 
-@app.get("/users/{user_id}")
+@app.get("/api/users/{user_id}")
 def read_user(user_id: int) -> list[User]:
     cursor = conn.execute(f"SELECT * FROM users WHERE id={user_id}")
     return cursor.fetchall()
 
 
-@app.post("/users")
+@app.post("/api/users")
 def create_user(user: User):
     values = f"VALUES ({user.username}, {user.email})"
     target = "users(username, email)"
     conn.execute(f"INSERT {values} INTO {target}")
 
 
-@app.get("users/{user_id}/todos")
+@app.get("/api/users/{user_id}/todos")
 def read_user_todos(user_id: int) -> list[Todo]:
     cursor = conn.execute(f"SELECT * FROM todos WHERE user_id={user_id}")
     return cursor.fetchall()

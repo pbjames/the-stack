@@ -3,6 +3,7 @@ PRAGMA foreign_keys = ON;
 CREATE TABLE users (
     id INTEGER PRIMARY KEY,
     username TEXT NOT NULL,
+    password TEXT NOT NULL,
     email TEXT
 );
 
